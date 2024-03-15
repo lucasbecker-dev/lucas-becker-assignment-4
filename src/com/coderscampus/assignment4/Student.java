@@ -1,6 +1,6 @@
 package com.coderscampus.assignment4;
 
-public class Student {
+public class Student implements Comparable<Student> {
     private String studentID;
     private String studentName;
     private String course;
