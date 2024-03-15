@@ -49,4 +49,15 @@ public class Student {
     public void setGrade(String grade) {
         this.grade = grade;
     }
+
+    @Override
+    public int compareTo(Student student) {
+        int comparison = 0;
+        try {
+            comparison = Integer.parseInt(student.getGrade()) - Integer.parseInt(this.getGrade());
+        } catch (NumberFormatException e) {
+            System.out.println("Student grade String does not contain a parsable integer!");
+        }
+        return comparison;
+    }
 }
