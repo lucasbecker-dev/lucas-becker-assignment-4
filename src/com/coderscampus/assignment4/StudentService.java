@@ -1,7 +1,6 @@
 package com.coderscampus.assignment4;
 
 import java.io.*;
-import java.nio.file.Path;
 import java.util.Arrays;
 
 public class StudentService {
@@ -25,7 +24,7 @@ public class StudentService {
         try (BufferedReader reader = new BufferedReader(new FileReader(filePath));
              BufferedWriter writer1 = new BufferedWriter(new FileWriter(FILE_NAME_1));
              BufferedWriter writer2 = new BufferedWriter(new FileWriter(FILE_NAME_2));
-             BufferedWriter writer3 = new BufferedWriter(new FileWriter(FILE_NAME_3));) {
+             BufferedWriter writer3 = new BufferedWriter(new FileWriter(FILE_NAME_3))) {
 
             // write file header to each file
             final String fileHeader = "Student ID,Student Name,Course,Grade";
