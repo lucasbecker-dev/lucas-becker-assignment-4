@@ -1,7 +1,7 @@
 package com.coderscampus.assignment4;
 
 import java.io.*;
-import java.util.ArrayList;
+import java.util.Arrays;
 
 public class StudentService {
 
@@ -52,7 +52,30 @@ public class StudentService {
                 ++count;
             }
 
+            // sort the Student arrays using custom Comparator
+            Arrays.sort(course1Students, new StudentComparator());
+            Arrays.sort(course2Students, new StudentComparator());
+            Arrays.sort(course3Students, new StudentComparator());
 
+            // write the sorted arrays using the appropriate writers
+            for (Student student : course1Students) {
+                if (student == null) {
+                    break;
+                }
+                writer1.write(student.toString());
+            }
+            for (Student student : course2Students) {
+                if (student == null) {
+                    break;
+                }
+                writer2.write(student.toString());
+            }
+            for (Student student : course3Students) {
+                if (student == null) {
+                    break;
+                }
+                writer3.write(student.toString());
+            }
 
         } catch (FileNotFoundException e) {
             System.out.println("File not found: " + filePath);
