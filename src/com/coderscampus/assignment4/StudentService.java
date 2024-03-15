@@ -1,6 +1,7 @@
 package com.coderscampus.assignment4;
 
 import java.io.*;
+import java.nio.file.Path;
 import java.util.Arrays;
 
 public class StudentService {
@@ -8,7 +9,7 @@ public class StudentService {
     public static void parseFile(String filePath) {
 
         // setup local variables
-        final String DESTINATION_PATH = "src/com/coderscampus/assignment4";
+        final String DESTINATION_PATH = "src/com/coderscampus/assignment4/";
         final String FILE_NAME_1 = DESTINATION_PATH + "course1.csv";
         final String FILE_NAME_2 = DESTINATION_PATH + "course2.csv";
         final String FILE_NAME_3 = DESTINATION_PATH + "course3.csv";
@@ -27,15 +28,17 @@ public class StudentService {
              BufferedWriter writer3 = new BufferedWriter(new FileWriter(FILE_NAME_3));) {
 
             // write file header to each file
-            final String fileHeader = "Student ID,Student Name,Course,Grade\n";
-            writer1.write(fileHeader);
-            writer2.write(fileHeader);
-            writer3.write(fileHeader);
+            final String fileHeader = "Student ID,Student Name,Course,Grade";
+            final String fileHeaderWithNewLine = fileHeader + "\n";
+            writer1.write(fileHeaderWithNewLine);
+            writer2.write(fileHeaderWithNewLine);
+            writer3.write(fileHeaderWithNewLine);
 
             // read through csv file and parse into appropriate Student arrays
             String currentLine;
             int count = 0;
-            while ((currentLine = reader.readLine()) != null) {
+            reader.readLine(); // throw away the first line since it's always the file header, not a Student
+            while ((currentLine = reader.readLine()) != null && count < STUDENT_ARRAY_SIZE) {
                 if (currentLine.contains(COURSE_NAME_1)) {
                     String[] splitLine = currentLine.split(",");
                     course1Students[count] = new Student(splitLine[0], splitLine[1], splitLine[2], splitLine[3]);
@@ -59,22 +62,19 @@ public class StudentService {
 
             // write the sorted arrays using the appropriate writers
             for (Student student : course1Students) {
-                if (student == null) {
-                    break;
+                if (student != null) {
+                    writer1.write(student.toString());
                 }
-                writer1.write(student.toString());
             }
             for (Student student : course2Students) {
-                if (student == null) {
-                    break;
+                if (student != null) {
+                    writer2.write(student.toString());
                 }
-                writer2.write(student.toString());
             }
             for (Student student : course3Students) {
-                if (student == null) {
-                    break;
+                if (student != null) {
+                    writer3.write(student.toString());
                 }
-                writer3.write(student.toString());
             }
 
         } catch (FileNotFoundException e) {
