@@ -20,6 +20,9 @@ public class Student implements Comparable<Student> {
 
     @Override
     public int compareTo(Student student) {
+        if (student == null) {
+            return 1;
+        }
         int comparison = 0;
         try {
             comparison = Integer.parseInt(student.getGrade()) - Integer.parseInt(this.getGrade());
