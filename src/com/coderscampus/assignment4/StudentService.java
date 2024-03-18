@@ -27,11 +27,10 @@ public class StudentService {
              BufferedWriter writer3 = new BufferedWriter(new FileWriter(FILE_NAME_3))) {
 
             // write file header to each file
-            final String fileHeader = "Student ID,Student Name,Course,Grade";
-            final String fileHeaderWithNewLine = fileHeader + "\n";
-            writer1.write(fileHeaderWithNewLine);
-            writer2.write(fileHeaderWithNewLine);
-            writer3.write(fileHeaderWithNewLine);
+            final String fileHeader = "Student ID,Student Name,Course,Grade\n";
+            writer1.write(fileHeader);
+            writer2.write(fileHeader);
+            writer3.write(fileHeader);
 
             // read through csv file and parse into appropriate Student arrays
             String currentLine;
