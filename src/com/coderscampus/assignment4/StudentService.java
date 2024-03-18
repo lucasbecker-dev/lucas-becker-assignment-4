@@ -63,9 +63,18 @@ public class StudentService {
             }
 
             // sort the Student arrays using custom Comparator
-            Arrays.sort(course1Students, new StudentComparator());
-            Arrays.sort(course2Students, new StudentComparator());
-            Arrays.sort(course3Students, new StudentComparator());
+            try {
+                StudentComparator studentComparator = new StudentComparator();
+                Arrays.sort(course1Students, studentComparator);
+                Arrays.sort(course2Students, studentComparator);
+                Arrays.sort(course3Students, studentComparator);
+            } catch (ClassCastException e) {
+                System.err.println("Array contains elements that are not mutually comparable using the specified comparator");
+                System.err.println(e.getMessage());
+            } catch (IllegalArgumentException e) {
+                System.err.println("Specified comparator violates the Comparator contract");
+                System.err.println(e.getMessage());
+            }
 
             // write the sorted arrays using the appropriate writers
             for (Student student : course1Students) {
