@@ -2,6 +2,7 @@ package com.coderscampus.assignment4;
 
 import java.io.*;
 import java.util.Arrays;
+import java.util.regex.PatternSyntaxException;
 
 public class StudentService {
 
@@ -37,18 +38,26 @@ public class StudentService {
             int count = 0;
             reader.readLine(); // throw away the first line since it's always the file header, not a Student
             while ((currentLine = reader.readLine()) != null && count < STUDENT_ARRAY_SIZE) {
-                if (currentLine.contains(COURSE_NAME_1)) {
+                try {
                     String[] splitLine = currentLine.split(",");
-                    course1Students[count] = new Student(splitLine[0], splitLine[1], splitLine[2], splitLine[3]);
-                } else if (currentLine.contains(COURSE_NAME_2)) {
-                    String[] splitLine = currentLine.split(",");
-                    course2Students[count] = new Student(splitLine[0], splitLine[1], splitLine[2], splitLine[3]);
-                } else if (currentLine.contains(COURSE_NAME_3)) {
-                    String[] splitLine = currentLine.split(",");
-                    course3Students[count] = new Student(splitLine[0], splitLine[1], splitLine[2], splitLine[3]);
-                } else {
-                    String invalidCourseName = currentLine.split(",")[2].split(" ")[0];
-                    System.err.println("No such course name: " + invalidCourseName);
+                    String courseName = splitLine[2].split(" ")[0];
+                    switch (courseName) {
+                        case COURSE_NAME_1:
+                            course1Students[count] = new Student(splitLine[0], splitLine[1], splitLine[2], splitLine[3]);
+                            break;
+                        case COURSE_NAME_2:
+                            course2Students[count] = new Student(splitLine[0], splitLine[1], splitLine[2], splitLine[3]);
+                            break;
+                        case COURSE_NAME_3:
+                            course3Students[count] = new Student(splitLine[0], splitLine[1], splitLine[2], splitLine[3]);
+                            break;
+                        default:
+                            System.err.println("No such course name: " + courseName);
+                            break;
+                    }
+                } catch (PatternSyntaxException e) {
+                    System.err.println("Invalid format for file: " + filePath);
+                    System.err.println(e.getMessage());
                 }
                 ++count;
             }
