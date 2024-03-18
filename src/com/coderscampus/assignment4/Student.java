@@ -28,7 +28,7 @@ public class Student implements Comparable<Student> {
             comparison = Integer.parseInt(student.getGrade()) - Integer.parseInt(this.getGrade());
         } catch (NumberFormatException e) {
             System.out.println("Student grade String does not contain a parsable integer!");
-            e.getMessage();
+            System.out.println(e.getMessage());
         }
         return comparison;
     }
