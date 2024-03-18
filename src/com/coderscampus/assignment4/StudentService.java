@@ -94,11 +94,11 @@ public class StudentService {
             }
 
         } catch (FileNotFoundException e) {
-            System.out.println("File not found: " + filePath);
-            System.out.println(e.getMessage());
+            System.err.println("File not found: " + filePath);
+            System.err.println(e.getMessage());
         } catch (IOException e) {
-            System.out.println("File read failed: " + filePath);
-            System.out.println(e.getMessage());
+            System.err.println("File read failed: " + filePath);
+            System.err.println(e.getMessage());
         }
     }
 
