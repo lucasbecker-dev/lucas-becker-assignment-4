@@ -9,6 +9,7 @@ public class StudentService {
     private static final String FILE_NAME_1 = DESTINATION_PATH + "course1.csv";
     private static final String FILE_NAME_2 = DESTINATION_PATH + "course2.csv";
     private static final String FILE_NAME_3 = DESTINATION_PATH + "course3.csv";
+    private static final String FILE_HEADER = "Student ID,Student Name,Course,Grade\n";
     private static final String COURSE_NAME_1 = "COMPSCI";
     private static final String COURSE_NAME_2 = "APMTH";
     private static final String COURSE_NAME_3 = "STAT";
@@ -41,9 +42,8 @@ public class StudentService {
     }
 
     private static void writeHeaders(BufferedWriter... writers) throws IOException {
-        final String fileHeader = "Student ID,Student Name,Course,Grade\n";
         for (BufferedWriter writer : writers) {
-            writer.write(fileHeader);
+            writer.write(FILE_HEADER);
         }
     }
 
